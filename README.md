@@ -69,12 +69,13 @@ This runs silently after form submission — the patient sees a success message,
 | Layer    | Technology                                |
 | -------- | ----------------------------------------- |
 | Frontend | HTML5, CSS3, Vanilla JavaScript           |
+| Backend  | Node.js HTTP server (`server.js`)         |
 | AI / LLM | Groq API — llama-3.3-70b-versatile        |
-| Storage  | localStorage (client-side, zero backend)  |
+| Storage  | localStorage (submissions) + `.env` (key) |
 | Fonts    | Google Fonts (DM Serif Display + DM Sans) |
-| Hosting  | Vercel (static)                           |
+| Hosting  | Local Node server / static frontend        |
 
-**Zero dependencies. No npm. No build step. Two files + one JS file.**
+**No npm dependencies. No build step. Lightweight local backend proxy for AI calls.**
 
 ---
 
@@ -107,8 +108,8 @@ This app solves all three:
 1. Clone the repo
 
 ```bash
-git clone
-cd medicare-ngo
+git clone https://github.com/ius-sharma/healthcare-support-web-app.git
+cd healthcare-support-web-app
 ```
 
 2. Add your Groq API key in `.env`:
@@ -116,6 +117,10 @@ cd medicare-ngo
 ```env
 GROQ_API_KEY=your_key_here
 ```
+
+Notes:
+- Preferred key name is `GROQ_API_KEY`
+- `YOUR_GROQ_API_KEY` is also supported for backward compatibility
 
 3. Start the local server:
 
@@ -127,6 +132,9 @@ node server.js
 
 5. To view the admin dashboard, open http://localhost:3000/admin.html in the same browser (localStorage is shared)
 
+Optional (Live Server compatibility):
+- You can open pages on `127.0.0.1:5500`, but keep `node server.js` running on port `3000` for AI features.
+
 ---
 
 ## 📁 Project Structure
@@ -136,6 +144,8 @@ medicare-ngo/
 ├── index.html      # Main portal — registration forms + AI chatbot
 ├── admin.html      # Admin dashboard — submissions + triage + AI summary
 ├── app.js          # All JavaScript logic — forms, triage, chatbot
+├── server.js       # Local backend proxy for Groq API + static serving
+├── .env            # Local environment variables (not for public commits)
 └── README.md       # This file
 ```
 
@@ -144,6 +154,7 @@ medicare-ngo/
 ## 🔐 API Key Note
 
 The Groq API key is read server-side from `.env` and never exposed to browser JavaScript.
+This prevents leaking your key in frontend code or browser devtools.
 
 ---
 
