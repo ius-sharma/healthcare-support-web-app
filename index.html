@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediCare Support — Patient & Volunteer Portal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #f5f2ec;
+        --surface: #ffffff;
+        --green: #1a6b4a;
+        --green-light: #d4eddf;
+        --green-mid: #2d9768;
+        --accent: #e8533f;
+        --text: #1c1c1c;
+        --muted: #6b7280;
+        --border: #e2ddd6;
+        --chat-bg: #f9f7f4;
+        --radius: 16px;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      /* NAV */
+      nav {
+        background: var(--green);
+        padding: 18px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-logo {
+        font-family: "DM Serif Display", serif;
+        color: #fff;
+        font-size: 1.5rem;
+        letter-spacing: -0.5px;
+      }
+      .nav-logo span { color: #7edaaa; }
+      .nav-links { display: flex; gap: 28px; }
+      .nav-links a {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover { color: #fff; }
+
+      /* HERO */
+      .hero {
+        background: linear-gradient(135deg, var(--green) 0%, #0f4a34 100%);
+        padding: 80px 40px 60px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(125, 218, 170, 0.15) 0%, transparent 70%);
+        top: -100px;
+        right: -100px;
+        border-radius: 50%;
+      }
+      .hero-badge {
+        display: inline-block;
+        background: rgba(125, 218, 170, 0.2);
+        border: 1px solid rgba(125, 218, 170, 0.4);
+        color: #7edaaa;
+        padding: 6px 16px;
+        border-radius: 100px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+      .hero h1 {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+        color: #fff;
+        line-height: 1.15;
+        max-width: 700px;
+        margin: 0 auto 20px;
+      }
+      .hero h1 em { color: #7edaaa; font-style: italic; }
+      .hero p {
+        color: rgba(255, 255, 255, 0.7);
+        max-width: 520px;
+        margin: 0 auto 36px;
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+      .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        padding: 14px 30px;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.15s, box-shadow 0.15s;
+        font-family: "DM Sans", sans-serif;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(232, 83, 63, 0.4);
+      }
+      .btn-outline {
+        background: transparent;
+        color: #fff;
+        border: 1.5px solid rgba(255, 255, 255, 0.4);
+        padding: 14px 30px;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-family: "DM Sans", sans-serif;
+      }
+      .btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
+
+      /* STATS BAR */
+      .stats-bar {
+        background: var(--surface);
+        padding: 28px 40px;
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        border-bottom: 1px solid var(--border);
+        flex-wrap: wrap;
+      }
+      .stat { text-align: center; }
+      .stat-num {
+        font-family: "DM Serif Display", serif;
+        font-size: 2rem;
+        color: var(--green);
+      }
+      .stat-label { font-size: 0.82rem; color: var(--muted); font-weight: 500; margin-top: 2px; }
+
+      /* MAIN LAYOUT */
+      .main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 60px 24px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+
+      /* CARD */
+      .card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+      }
+      .card-header {
+        background: var(--green);
+        padding: 22px 28px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .card-header .icon {
+        width: 38px;
+        height: 38px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+      }
+      .card-title { color: #fff; font-weight: 600; font-size: 1.1rem; }
+      .card-sub { color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; margin-top: 2px; }
+      .card-body { padding: 28px; }
+
+      /* FORM */
+      .tab-row {
+        display: flex;
+        background: var(--bg);
+        border-radius: 10px;
+        padding: 4px;
+        margin-bottom: 24px;
+      }
+      .tab {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        background: transparent;
+        border-radius: 8px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--muted);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .tab.active {
+        background: var(--surface);
+        color: var(--green);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+      }
+      .form-group { margin-bottom: 18px; }
+      .form-group label {
+        display: block;
+        font-size: 0.84rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 7px;
+      }
+      .form-group label .req { color: var(--accent); margin-left: 2px; }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 11px 14px;
+        border: 1.5px solid var(--border);
+        border-radius: 10px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.92rem;
+        color: var(--text);
+        background: var(--bg);
+        transition: border-color 0.2s, box-shadow 0.2s;
+        outline: none;
+      }
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--green-mid);
+        box-shadow: 0 0 0 3px rgba(45, 151, 104, 0.12);
+      }
+      .form-group textarea { resize: vertical; min-height: 80px; }
+      .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .submit-btn {
+        width: 100%;
+        background: var(--green);
+        color: #fff;
+        border: none;
+        padding: 14px;
+        border-radius: 10px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.15s;
+        margin-top: 8px;
+      }
+      .submit-btn:hover { background: #0f4a34; transform: translateY(-1px); }
+      .success-msg {
+        display: none;
+        background: var(--green-light);
+        border: 1px solid #a3d9bb;
+        color: var(--green);
+        padding: 16px;
+        border-radius: 10px;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 16px;
+        font-size: 0.92rem;
+      }
+
+      /* CHATBOT */
+      .chat-window {
+        background: var(--chat-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        height: 340px;
+        overflow-y: auto;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 16px;
+        scroll-behavior: smooth;
+      }
+      .msg {
+        max-width: 82%;
+        padding: 11px 15px;
+        border-radius: 14px;
+        font-size: 0.88rem;
+        line-height: 1.55;
+        animation: fadeUp 0.2s ease;
+      }
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .msg.bot {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        align-self: flex-start;
+        border-bottom-left-radius: 4px;
+      }
+      .msg.user {
+        background: var(--green);
+        color: #fff;
+        align-self: flex-end;
+        border-bottom-right-radius: 4px;
+      }
+      .msg.typing {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        align-self: flex-start;
+        font-style: italic;
+      }
+      .chat-quick { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+      .quick-btn {
+        background: var(--green-light);
+        color: var(--green);
+        border: 1px solid #a3d9bb;
+        padding: 6px 13px;
+        border-radius: 100px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-family: "DM Sans", sans-serif;
+      }
+      .quick-btn:hover { background: #b8e8cc; }
+      .chat-input-row { display: flex; gap: 10px; }
+      .chat-input-row input {
+        flex: 1;
+        padding: 11px 16px;
+        border: 1.5px solid var(--border);
+        border-radius: 10px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.9rem;
+        background: var(--surface);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .chat-input-row input:focus { border-color: var(--green-mid); }
+      .send-btn {
+        background: var(--green);
+        color: #fff;
+        border: none;
+        padding: 11px 18px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.2s;
+      }
+      .send-btn:hover { background: #0f4a34; }
+      .send-btn:disabled { opacity: 0.5; cursor: default; }
+      .ai-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: #fff8f0;
+        border: 1px solid #fcd9a0;
+        color: #b45309;
+        padding: 4px 10px;
+        border-radius: 100px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+
+      /* FULL WIDTH */
+      .full-width { grid-column: 1 / -1; }
+
+      /* INFO CARDS */
+      .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      .info-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 24px;
+      }
+      .info-icon { font-size: 2rem; margin-bottom: 12px; }
+      .info-title { font-weight: 700; margin-bottom: 6px; font-size: 1rem; }
+      .info-text { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+
+      /* FOOTER */
+      footer {
+        text-align: center;
+        padding: 30px;
+        color: var(--muted);
+        font-size: 0.83rem;
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+      }
+
+      @media (max-width: 768px) {
+        .main { grid-template-columns: 1fr; }
+        .info-grid { grid-template-columns: 1fr; }
+        .stats-bar { gap: 28px; }
+        nav { padding: 16px 20px; }
+        .nav-links { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav>
+      <div class="nav-logo">Medi<span>Care</span> NGO</div>
+      <div class="nav-links">
+        <a href="#">About</a>
+        <a href="#">Programs</a>
+        <a href="#">Volunteer</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-badge">🌿 Community Health Initiative</div>
+      <h1>Healthcare Support,<br /><em>Closer to Home</em></h1>
+      <p>
+        Register for patient support, join as a volunteer, or ask our AI
+        assistant any health access questions — we're here to help.
+      </p>
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="document.querySelector('.main').scrollIntoView({ behavior: 'smooth' })">
+          Register Now
+        </button>
+        <button class="btn-outline" onclick="document.getElementById('chatSection').scrollIntoView({ behavior: 'smooth' })">
+          Ask Our AI ↓
+        </button>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-num">4,200+</div><div class="stat-label">Patients Supported</div></div>
+      <div class="stat"><div class="stat-num">380</div><div class="stat-label">Active Volunteers</div></div>
+      <div class="stat"><div class="stat-num">12</div><div class="stat-label">Districts Covered</div></div>
+      <div class="stat"><div class="stat-num">Free</div><div class="stat-label">All Services</div></div>
+    </div>
+
+    <div class="main">
+
+      <!-- FORM CARD -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">📋</div>
+          <div>
+            <div class="card-title">Registration Portal</div>
+            <div class="card-sub">Patient support or volunteer signup</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="tab-row">
+            <button class="tab active" onclick="switchTab('patient', this)">🏥 Patient Support</button>
+            <button class="tab" onclick="switchTab('volunteer', this)">🤝 Volunteer</button>
+            <button class="tab" onclick="switchTab('contact', this)">✉️ Contact</button>
+          </div>
+
+          <!-- Patient Form -->
+          <div id="patientForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name <span class="req">*</span></label>
+                <input type="text" placeholder="Ramesh Kumar" id="p-name" />
+              </div>
+              <div class="form-group">
+                <label>Age <span class="req">*</span></label>
+                <input type="number" placeholder="35" min="1" max="120" id="p-age" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Phone / WhatsApp <span class="req">*</span></label>
+              <input type="tel" placeholder="+91 98765 43210" id="p-phone" />
+            </div>
+            <div class="form-group">
+              <label>City / District <span class="req">*</span></label>
+              <input type="text" placeholder="Rajkot, Gujarat" id="p-city" />
+            </div>
+            <div class="form-group">
+              <label>Medical Need / Concern</label>
+              <select id="p-need">
+                <option value="">Select category</option>
+                <option>General Consultation</option>
+                <option>Mental Health Support</option>
+                <option>Medicines / Supplies</option>
+                <option>Specialist Referral</option>
+                <option>Home Visit Request</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Brief Description</label>
+              <textarea placeholder="Describe your situation briefly..." id="p-desc"></textarea>
+            </div>
+            <button class="submit-btn" onclick="submitForm('patient')">Submit Patient Request →</button>
+            <div class="success-msg" id="patient-success">✅ Request submitted! Our team will contact you within 24 hours.</div>
+          </div>
+
+          <!-- Volunteer Form -->
+          <div id="volunteerForm" style="display: none">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name <span class="req">*</span></label>
+                <input type="text" placeholder="Priya Sharma" id="v-name" />
+              </div>
+              <div class="form-group">
+                <label>Phone <span class="req">*</span></label>
+                <input type="tel" placeholder="+91 98765 43210" id="v-phone" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email Address <span class="req">*</span></label>
+              <input type="email" placeholder="priya@email.com" id="v-email" />
+            </div>
+            <div class="form-group">
+              <label>Profession / Skills</label>
+              <select id="v-skill">
+                <option value="">Select your background</option>
+                <option>Medical Professional (Doctor/Nurse)</option>
+                <option>Pharmacy / Lab</option>
+                <option>Social Worker</option>
+                <option>Tech / Software</option>
+                <option>Driver / Logistics</option>
+                <option>Student</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Availability</label>
+              <select id="v-avail">
+                <option value="">How often can you volunteer?</option>
+                <option>Weekends only</option>
+                <option>Evenings (weekdays)</option>
+                <option>Full-time</option>
+                <option>On-call / flexible</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Why do you want to volunteer?</label>
+              <textarea placeholder="Share your motivation..." id="v-why"></textarea>
+            </div>
+            <button class="submit-btn" onclick="submitForm('volunteer')">Join as Volunteer →</button>
+            <div class="success-msg" id="volunteer-success">✅ Welcome aboard! We'll reach out with onboarding details soon.</div>
+          </div>
+
+          <!-- Contact Form -->
+          <div id="contactForm" style="display: none">
+            <div class="form-group">
+              <label>Your Name <span class="req">*</span></label>
+              <input type="text" placeholder="Name" id="c-name" />
+            </div>
+            <div class="form-group">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" placeholder="email@domain.com" id="c-email" />
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <input type="text" placeholder="Partnership / Media / General" id="c-subj" />
+            </div>
+            <div class="form-group">
+              <label>Message <span class="req">*</span></label>
+              <textarea placeholder="Your message..." id="c-msg" style="min-height: 120px"></textarea>
+            </div>
+            <button class="submit-btn" onclick="submitForm('contact')">Send Message →</button>
+            <div class="success-msg" id="contact-success">✅ Message received! We typically reply within 48 hours.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHATBOT CARD -->
+      <div class="card" id="chatSection">
+        <div class="card-header">
+          <div class="icon">🤖</div>
+          <div>
+            <div class="card-title">AI Health Support Assistant</div>
+            <div class="card-sub">Powered by Groq AI · Available 24/7</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="ai-badge">✨ AI-Powered — Real answers, not scripted responses</div>
+          <div class="chat-quick">
+            <button class="quick-btn" onclick="askQuick('How do I register for patient support?')">How to register?</button>
+            <button class="quick-btn" onclick="askQuick('What services does this NGO provide?')">Our services</button>
+            <button class="quick-btn" onclick="askQuick('How can I become a volunteer?')">Volunteer info</button>
+            <button class="quick-btn" onclick="askQuick('Is this service free of cost?')">Is it free?</button>
+          </div>
+          <div class="chat-window" id="chatWindow">
+            <div class="msg bot">
+              👋 Hi! I'm the MediCare Support AI. Ask me anything about our healthcare programs, how to register, volunteering, or general health access questions. I'm here to help!
+            </div>
+          </div>
+          <div class="chat-input-row">
+            <input type="text" id="chatInput" placeholder="Type your question..." />
+            <button class="send-btn" id="sendBtn" onclick="sendChat()">➤</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- INFO SECTION -->
+      <div class="full-width">
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-icon">🏥</div>
+            <div class="info-title">Patient Support Program</div>
+            <div class="info-text">Free medical consultations, referrals to specialists, and medicine access for underprivileged patients across 12 districts.</div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">🧠</div>
+            <div class="info-title">Mental Health Helpline</div>
+            <div class="info-text">Confidential counseling sessions with certified professionals. Available Monday to Saturday, 9AM–6PM.</div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">🚑</div>
+            <div class="info-title">Emergency Assistance</div>
+            <div class="info-text">24/7 coordination for medical emergencies including ambulance tie-ups, hospital navigation, and crisis support.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      © 2026 MediCare NGO · Built with ❤️ for community health access · All services free of charge
+    </footer>
+
+    <!-- ✅ ONLY these scripts at bottom of body — no other JS anywhere -->
+    <script>window.GROQ_API_KEY = "YOUR_GROQ_API_KEY";</script>
+    <script src="app.js"></script>
+
+  </body>
+</html>

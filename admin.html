@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediCare NGO — Admin Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --bg: #f5f2ec;
+        --surface: #ffffff;
+        --green: #1a6b4a;
+        --green-light: #d4eddf;
+        --green-mid: #2d9768;
+        --accent: #e8533f;
+        --text: #1c1c1c;
+        --muted: #6b7280;
+        --border: #e2ddd6;
+        --radius: 14px;
+
+        --high: #dc2626;
+        --high-bg: #fef2f2;
+        --high-border: #fecaca;
+
+        --medium: #d97706;
+        --medium-bg: #fffbeb;
+        --medium-border: #fde68a;
+
+        --low: #16a34a;
+        --low-bg: #f0fdf4;
+        --low-border: #bbf7d0;
+
+        --pending: #6b7280;
+        --pending-bg: #f9fafb;
+        --pending-border: #e5e7eb;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      /* NAV */
+      nav {
+        background: var(--green);
+        padding: 16px 36px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-left { display: flex; align-items: center; gap: 16px; }
+      .nav-logo {
+        font-family: "DM Serif Display", serif;
+        color: #fff;
+        font-size: 1.3rem;
+      }
+      .nav-logo span { color: #7edaaa; }
+      .nav-badge {
+        background: rgba(255,255,255,0.15);
+        color: rgba(255,255,255,0.9);
+        padding: 3px 10px;
+        border-radius: 100px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+      .nav-right { display: flex; align-items: center; gap: 14px; }
+      .nav-link {
+        color: rgba(255,255,255,0.7);
+        text-decoration: none;
+        font-size: 0.88rem;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .nav-link:hover { color: #fff; }
+      .refresh-btn {
+        background: rgba(255,255,255,0.15);
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .refresh-btn:hover { background: rgba(255,255,255,0.25); }
+
+      /* MAIN */
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 36px 24px;
+      }
+
+      /* PAGE HEADER */
+      .page-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .page-title {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.9rem;
+        color: var(--text);
+        line-height: 1.2;
+      }
+      .page-sub { color: var(--muted); font-size: 0.88rem; margin-top: 4px; }
+      .clear-btn {
+        background: #fff;
+        color: var(--accent);
+        border: 1.5px solid var(--accent);
+        padding: 9px 18px;
+        border-radius: 8px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .clear-btn:hover { background: var(--accent); color: #fff; }
+
+      /* STATS ROW */
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+      .stat-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 18px 20px;
+        cursor: pointer;
+        transition: box-shadow 0.2s, transform 0.15s;
+      }
+      .stat-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+      .stat-card.active { border-color: var(--green); box-shadow: 0 0 0 2px rgba(26,107,74,0.15); }
+      .stat-num {
+        font-family: "DM Serif Display", serif;
+        font-size: 2rem;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+      .stat-label { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+      .stat-card.all .stat-num { color: var(--green); }
+      .stat-card.high .stat-num { color: var(--high); }
+      .stat-card.medium .stat-num { color: var(--medium); }
+      .stat-card.low .stat-num { color: var(--low); }
+      .stat-card.pending .stat-num { color: var(--pending); }
+
+      /* FILTER ROW */
+      .filter-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .filter-label { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-right: 4px; }
+      .filter-btn {
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        color: var(--muted);
+        padding: 6px 14px;
+        border-radius: 100px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .filter-btn:hover { border-color: var(--green); color: var(--green); }
+      .filter-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+      /* SUBMISSIONS LIST */
+      .submissions-list { display: flex; flex-direction: column; gap: 14px; }
+
+      /* SUBMISSION CARD */
+      .sub-card {
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: box-shadow 0.2s;
+        animation: slideIn 0.2s ease;
+      }
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .sub-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+
+      .sub-card.HIGH { border-left: 4px solid var(--high); }
+      .sub-card.MEDIUM { border-left: 4px solid var(--medium); }
+      .sub-card.LOW { border-left: 4px solid var(--low); }
+      .sub-card.null { border-left: 4px solid var(--pending); }
+
+      .sub-header {
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .sub-header-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+      .type-badge {
+        padding: 4px 10px;
+        border-radius: 100px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .type-badge.patient { background: #eff6ff; color: #1d4ed8; }
+      .type-badge.volunteer { background: #f5f3ff; color: #6d28d9; }
+      .type-badge.contact { background: #fff7ed; color: #c2410c; }
+
+      .priority-badge {
+        padding: 4px 12px;
+        border-radius: 100px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+      .priority-badge.HIGH { background: var(--high-bg); color: var(--high); border: 1px solid var(--high-border); }
+      .priority-badge.MEDIUM { background: var(--medium-bg); color: var(--medium); border: 1px solid var(--medium-border); }
+      .priority-badge.LOW { background: var(--low-bg); color: var(--low); border: 1px solid var(--low-border); }
+      .priority-badge.pending { background: var(--pending-bg); color: var(--pending); border: 1px solid var(--pending-border); }
+
+      .sub-name { font-weight: 600; font-size: 0.95rem; }
+      .sub-time { font-size: 0.78rem; color: var(--muted); }
+
+      .sub-body { padding: 0 20px 16px; display: flex; flex-direction: column; gap: 8px; }
+
+      .sub-row { display: flex; gap: 24px; flex-wrap: wrap; }
+      .sub-field { font-size: 0.83rem; color: var(--muted); }
+      .sub-field span { color: var(--text); font-weight: 500; }
+
+      .sub-desc {
+        background: var(--bg);
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        color: var(--text);
+        line-height: 1.5;
+        border: 1px solid var(--border);
+      }
+
+      .triage-box {
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.83rem;
+        line-height: 1.5;
+      }
+      .triage-box.HIGH { background: var(--high-bg); border: 1px solid var(--high-border); color: #991b1b; }
+      .triage-box.MEDIUM { background: var(--medium-bg); border: 1px solid var(--medium-border); color: #92400e; }
+      .triage-box.LOW { background: var(--low-bg); border: 1px solid var(--low-border); color: #14532d; }
+      .triage-title { font-weight: 700; margin-bottom: 2px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+      /* EMPTY STATE */
+      .empty-state {
+        text-align: center;
+        padding: 80px 20px;
+        color: var(--muted);
+      }
+      .empty-icon { font-size: 3rem; margin-bottom: 16px; }
+      .empty-title { font-family: "DM Serif Display", serif; font-size: 1.4rem; color: var(--text); margin-bottom: 8px; }
+      .empty-sub { font-size: 0.9rem; line-height: 1.6; }
+      .empty-link {
+        display: inline-block;
+        margin-top: 20px;
+        background: var(--green);
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 22px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: background 0.2s;
+      }
+      .empty-link:hover { background: #0f4a34; }
+
+      /* AI SUMMARY */
+      .ai-summary-section { margin-bottom: 28px; }
+      .ai-summary-btn {
+        background: var(--green);
+        color: #fff;
+        border: none;
+        padding: 11px 22px;
+        border-radius: 10px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .ai-summary-btn:hover { background: #0f4a34; }
+      .ai-summary-btn:disabled { opacity: 0.6; cursor: default; }
+      .ai-summary-box {
+        display: none;
+        margin-top: 14px;
+        background: var(--surface);
+        border: 1.5px solid var(--green-mid);
+        border-radius: var(--radius);
+        padding: 20px 24px;
+      }
+      .ai-summary-box.visible { display: block; }
+      .ai-summary-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        color: var(--green);
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+      }
+      .ai-summary-text {
+        font-size: 0.88rem;
+        line-height: 1.7;
+        color: var(--text);
+        white-space: pre-wrap;
+      }
+
+      @media (max-width: 768px) {
+        .stats-row { grid-template-columns: repeat(3, 1fr); }
+        nav { padding: 14px 18px; }
+      }
+      @media (max-width: 480px) {
+        .stats-row { grid-template-columns: repeat(2, 1fr); }
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav>
+      <div class="nav-left">
+        <div class="nav-logo">Medi<span>Care</span> NGO</div>
+        <div class="nav-badge">Admin Panel</div>
+      </div>
+      <div class="nav-right">
+        <a href="index.html" class="nav-link">← Back to Portal</a>
+        <button class="refresh-btn" onclick="loadDashboard()">🔄 Refresh</button>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="page-header">
+        <div>
+          <div class="page-title">Submissions Dashboard</div>
+          <div class="page-sub">All patient requests, volunteer signups, and contacts — with AI triage priority</div>
+        </div>
+        <button class="clear-btn" onclick="clearAll()">🗑 Clear All Data</button>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-row">
+        <div class="stat-card all active" onclick="filterByPriority('all', this)">
+          <div class="stat-num" id="count-all">0</div>
+          <div class="stat-label">Total</div>
+        </div>
+        <div class="stat-card high" onclick="filterByPriority('HIGH', this)">
+          <div class="stat-num" id="count-high">0</div>
+          <div class="stat-label">🔴 High</div>
+        </div>
+        <div class="stat-card medium" onclick="filterByPriority('MEDIUM', this)">
+          <div class="stat-num" id="count-medium">0</div>
+          <div class="stat-label">🟡 Medium</div>
+        </div>
+        <div class="stat-card low" onclick="filterByPriority('LOW', this)">
+          <div class="stat-num" id="count-low">0</div>
+          <div class="stat-label">🟢 Low</div>
+        </div>
+        <div class="stat-card pending" onclick="filterByPriority('pending', this)">
+          <div class="stat-num" id="count-pending">0</div>
+          <div class="stat-label">⏳ Pending</div>
+        </div>
+      </div>
+
+      <!-- AI SUMMARY -->
+      <div class="ai-summary-section">
+        <button class="ai-summary-btn" id="summaryBtn" onclick="generateSummary()">
+          ✨ Generate AI Summary Report
+        </button>
+        <div class="ai-summary-box" id="summaryBox">
+          <div class="ai-summary-header">🤖 AI Summary Report</div>
+          <div class="ai-summary-text" id="summaryText"></div>
+        </div>
+      </div>
+
+      <!-- FILTERS -->
+      <div class="filter-row">
+        <span class="filter-label">Filter by type:</span>
+        <button class="filter-btn active" onclick="filterByType('all', this)">All</button>
+        <button class="filter-btn" onclick="filterByType('patient', this)">🏥 Patients</button>
+        <button class="filter-btn" onclick="filterByType('volunteer', this)">🤝 Volunteers</button>
+        <button class="filter-btn" onclick="filterByType('contact', this)">✉️ Contacts</button>
+      </div>
+
+      <!-- SUBMISSIONS -->
+      <div class="submissions-list" id="submissionsList"></div>
+
+    </div>
+
+    <script>
+      window.GROQ_API_KEY = "YOUR_GROQ_API_KEY";
+
+      const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+      const MODEL = "llama-3.3-70b-versatile";
+
+      let allData = [];
+      let currentPriorityFilter = "all";
+      let currentTypeFilter = "all";
+
+      function getSubmissions() {
+        return JSON.parse(localStorage.getItem("medicare_submissions") || "[]");
+      }
+
+      function formatTime(iso) {
+        const d = new Date(iso);
+        return d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) +
+          " · " + d.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
+      }
+
+      function updateStats(data) {
+        document.getElementById("count-all").textContent = data.length;
+        document.getElementById("count-high").textContent = data.filter(d => d.priority === "HIGH").length;
+        document.getElementById("count-medium").textContent = data.filter(d => d.priority === "MEDIUM").length;
+        document.getElementById("count-low").textContent = data.filter(d => d.priority === "LOW").length;
+        document.getElementById("count-pending").textContent = data.filter(d => !d.priority).length;
+      }
+
+      function filterByPriority(p, el) {
+        currentPriorityFilter = p;
+        document.querySelectorAll(".stat-card").forEach(c => c.classList.remove("active"));
+        el.classList.add("active");
+        renderList();
+      }
+
+      function filterByType(t, el) {
+        currentTypeFilter = t;
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        el.classList.add("active");
+        renderList();
+      }
+
+      function renderList() {
+        let data = [...allData];
+
+        if (currentTypeFilter !== "all") {
+          data = data.filter(d => d.type === currentTypeFilter);
+        }
+
+        if (currentPriorityFilter !== "all") {
+          if (currentPriorityFilter === "pending") {
+            data = data.filter(d => !d.priority);
+          } else {
+            data = data.filter(d => d.priority === currentPriorityFilter);
+          }
+        }
+
+        const list = document.getElementById("submissionsList");
+
+        if (data.length === 0) {
+          list.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon">📭</div>
+              <div class="empty-title">No submissions yet</div>
+              <div class="empty-sub">Once patients or volunteers submit the form,<br/>their requests will appear here with AI triage priority.</div>
+              <a href="index.html" class="empty-link">Go to Portal →</a>
+            </div>`;
+          return;
+        }
+
+        list.innerHTML = data.map(entry => buildCard(entry)).join("");
+      }
+
+      function buildCard(entry) {
+        const { type, data, timestamp, priority, triage } = entry;
+        const priorityClass = priority || "null";
+        const priorityLabel = priority || "Analyzing...";
+
+        let fieldsHTML = "";
+        let descHTML = "";
+
+        if (type === "patient") {
+          fieldsHTML = `
+            <div class="sub-row">
+              ${data.age ? `<div class="sub-field">Age: <span>${data.age}</span></div>` : ""}
+              ${data.phone ? `<div class="sub-field">Phone: <span>${data.phone}</span></div>` : ""}
+              ${data.city ? `<div class="sub-field">City: <span>${data.city}</span></div>` : ""}
+              ${data.need ? `<div class="sub-field">Need: <span>${data.need}</span></div>` : ""}
+            </div>`;
+          if (data.desc) {
+            descHTML = `<div class="sub-desc">📝 ${data.desc}</div>`;
+          }
+        } else if (type === "volunteer") {
+          fieldsHTML = `
+            <div class="sub-row">
+              ${data.phone ? `<div class="sub-field">Phone: <span>${data.phone}</span></div>` : ""}
+              ${data.email ? `<div class="sub-field">Email: <span>${data.email}</span></div>` : ""}
+              ${data.skill ? `<div class="sub-field">Skill: <span>${data.skill}</span></div>` : ""}
+              ${data.avail ? `<div class="sub-field">Availability: <span>${data.avail}</span></div>` : ""}
+            </div>`;
+          if (data.why) {
+            descHTML = `<div class="sub-desc">💬 ${data.why}</div>`;
+          }
+        } else if (type === "contact") {
+          fieldsHTML = `
+            <div class="sub-row">
+              ${data.email ? `<div class="sub-field">Email: <span>${data.email}</span></div>` : ""}
+              ${data.subj ? `<div class="sub-field">Subject: <span>${data.subj}</span></div>` : ""}
+            </div>`;
+          if (data.msg) {
+            descHTML = `<div class="sub-desc">✉️ ${data.msg}</div>`;
+          }
+        }
+
+        let triageHTML = "";
+        if (triage) {
+          triageHTML = `
+            <div class="triage-box ${priority}">
+              <div class="triage-title">🤖 AI Triage Assessment</div>
+              <strong>Reason:</strong> ${triage.reason}<br/>
+              <strong>Action:</strong> ${triage.recommended_action}
+            </div>`;
+        }
+
+        return `
+          <div class="sub-card ${priorityClass}">
+            <div class="sub-header">
+              <div class="sub-header-left">
+                <span class="type-badge ${type}">${type}</span>
+                <span class="sub-name">${data.name || "—"}</span>
+                ${priority
+                  ? `<span class="priority-badge ${priority}">${priority} PRIORITY</span>`
+                  : `<span class="priority-badge pending">⏳ ANALYZING</span>`}
+              </div>
+              <span class="sub-time">${formatTime(timestamp)}</span>
+            </div>
+            <div class="sub-body">
+              ${fieldsHTML}
+              ${descHTML}
+              ${triageHTML}
+            </div>
+          </div>`;
+      }
+
+      function loadDashboard() {
+        allData = getSubmissions();
+        updateStats(allData);
+        renderList();
+      }
+
+      function clearAll() {
+        if (confirm("Delete all submissions? This cannot be undone.")) {
+          localStorage.removeItem("medicare_submissions");
+          loadDashboard();
+        }
+      }
+
+      // AI Summary — sends all data to Groq and gets a report
+      async function generateSummary() {
+        const data = getSubmissions();
+        if (data.length === 0) {
+          alert("No submissions to summarize yet.");
+          return;
+        }
+
+        const btn = document.getElementById("summaryBtn");
+        const box = document.getElementById("summaryBox");
+        const text = document.getElementById("summaryText");
+
+        btn.disabled = true;
+        btn.textContent = "⏳ Generating...";
+        box.classList.add("visible");
+        text.textContent = "Analyzing all submissions...";
+
+        const summary = data.map(e => {
+          const d = e.data;
+          return `[${e.type.toUpperCase()}] ${d.name || "Unknown"} | Priority: ${e.priority || "unanalyzed"} | ${e.triage?.reason || d.desc || d.msg || d.why || "No description"}`;
+        }).join("\n");
+
+        try {
+          const res = await fetch(GROQ_API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${window.GROQ_API_KEY}`,
+            },
+            body: JSON.stringify({
+              model: MODEL,
+              max_tokens: 1000,
+              messages: [
+                {
+                  role: "system",
+                  content: "You are a healthcare NGO operations analyst. Given a list of patient/volunteer/contact submissions, write a brief operational summary. Include: total counts, how many need urgent attention, top concerns, and 2-3 recommended actions for the NGO team. Be concise, clear, and actionable. Use plain text, no markdown.",
+                },
+                {
+                  role: "user",
+                  content: `Here are today's submissions:\n\n${summary}\n\nWrite a brief operational summary report.`,
+                },
+              ],
+            }),
+          });
+
+          const result = await res.json();
+          text.textContent = result.choices[0].message.content;
+        } catch (err) {
+          text.textContent = "Failed to generate summary. Please check your connection and try again.";
+        }
+
+        btn.disabled = false;
+        btn.textContent = "✨ Generate AI Summary Report";
+      }
+
+      // Load on page open
+      loadDashboard();
+
+      // Auto-refresh every 10 seconds (triage updates in background)
+      setInterval(loadDashboard, 10000);
+    </script>
+  </body>
+</html>
