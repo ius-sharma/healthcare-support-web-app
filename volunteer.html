@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Volunteer with MediCare</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f5f2ec;
+        --surface: #ffffff;
+        --green: #1a6b4a;
+        --green-mid: #2d9768;
+        --accent: #e8533f;
+        --text: #1c1c1c;
+        --muted: #6b7280;
+        --border: #e2ddd6;
+        --radius: 18px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: linear-gradient(180deg, #f8f5f0 0%, var(--bg) 100%);
+        color: var(--text);
+        min-height: 100vh;
+      }
+      nav {
+        background: var(--green);
+        padding: 18px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .brand {
+        font-family: "DM Serif Display", serif;
+        color: #fff;
+        font-size: 1.4rem;
+      }
+      .brand span {
+        color: #7edaaa;
+      }
+      .nav-links {
+        display: flex;
+        gap: 22px;
+        flex-wrap: wrap;
+      }
+      .nav-links a {
+        color: rgba(255, 255, 255, 0.78);
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 500;
+      }
+      .nav-links a:hover {
+        color: #fff;
+      }
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 56px 24px 72px;
+      }
+      .hero {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 42px;
+        box-shadow: 0 18px 40px rgba(26, 107, 74, 0.08);
+      }
+      .eyebrow {
+        color: var(--green-mid);
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-size: 0.78rem;
+        font-weight: 700;
+        margin-bottom: 14px;
+      }
+      h1 {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(2.1rem, 4vw, 3.5rem);
+        line-height: 1.05;
+        margin-bottom: 16px;
+      }
+      .lead {
+        max-width: 760px;
+        color: var(--muted);
+        font-size: 1.04rem;
+        line-height: 1.8;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 22px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+      }
+      .card h2 {
+        font-size: 1.05rem;
+        margin-bottom: 10px;
+      }
+      .card p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+      .section {
+        margin-top: 28px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 28px 30px;
+      }
+      .section h3 {
+        font-size: 1.25rem;
+        margin-bottom: 12px;
+      }
+      ul {
+        padding-left: 20px;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 22px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 18px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+      .btn.primary {
+        background: var(--green);
+        color: #fff;
+      }
+      .btn.secondary {
+        background: #fff;
+        color: var(--green);
+        border: 1px solid var(--border);
+      }
+      footer {
+        text-align: center;
+        color: var(--muted);
+        padding: 18px 24px 30px;
+      }
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="brand">Medi<span>Care</span> NGO</div>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="programs.html">Programs</a>
+        <a href="volunteer.html">Volunteer</a>
+        <a href="contact.html">Contact</a>
+        <a href="index.html">Portal</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </nav>
+
+    <main class="page">
+      <section class="hero">
+        <div class="eyebrow">Volunteer</div>
+        <h1>Join the support network.</h1>
+        <p class="lead">
+          Volunteers are a key part of the concept flow. This page explains how
+          the platform expects volunteers to contribute and what skills are most
+          useful.
+        </p>
+        <div class="grid">
+          <div class="card">
+            <h2>Medical help</h2>
+            <p>
+              Doctors, nurses, pharmacists, and lab workers can support
+              referrals and basic guidance.
+            </p>
+          </div>
+          <div class="card">
+            <h2>Operations help</h2>
+            <p>
+              Drivers, logistics support, and coordinators can help move
+              patients and supplies.
+            </p>
+          </div>
+          <div class="card">
+            <h2>Tech / support</h2>
+            <p>
+              Students and software volunteers can help improve workflows,
+              forms, and dashboards.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>How to get involved</h3>
+        <ul>
+          <li>Fill the volunteer form in the portal.</li>
+          <li>Share your skills and availability clearly.</li>
+          <li>The team can then match you with appropriate support tasks.</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="index.html">Open Volunteer Form</a>
+          <a class="btn secondary" href="contact.html">Ask for More Info</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Volunteer support makes the portal useful in the real world.
+    </footer>
+  </body>
+</html>

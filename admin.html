@@ -66,6 +66,13 @@
         align-items: center;
         gap: 16px;
       }
+      .nav-center {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
       .nav-logo {
         font-family: "DM Serif Display", serif;
         color: #fff;
@@ -96,6 +103,20 @@
         transition: color 0.2s;
       }
       .nav-link:hover {
+        color: #fff;
+      }
+      .nav-links {
+        display: flex;
+        gap: 22px;
+      }
+      .nav-links a {
+        color: rgba(255, 255, 255, 0.78);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
         color: #fff;
       }
       .refresh-btn {
@@ -533,6 +554,14 @@
       <div class="nav-left">
         <div class="nav-logo">Medi<span>Care</span> NGO</div>
         <div class="nav-badge">Admin Panel</div>
+      </div>
+      <div class="nav-center">
+        <div class="nav-links">
+          <a href="about.html">About</a>
+          <a href="programs.html">Programs</a>
+          <a href="volunteer.html">Volunteer</a>
+          <a href="contact.html">Contact</a>
+        </div>
       </div>
       <div class="nav-right">
         <a href="index.html" class="nav-link">← Back to Portal</a>
