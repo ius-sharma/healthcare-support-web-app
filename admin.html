@@ -626,10 +626,12 @@
     </div>
 
     <script>
-      const GROQ_API_URL =
-        window.location.port === "3000"
-          ? "/api/groq/chat"
-          : "http://localhost:3000/api/groq/chat";
+      const IS_LIVE_SERVER =
+        window.location.hostname === "127.0.0.1" ||
+        window.location.hostname === "localhost";
+      const GROQ_API_URL = IS_LIVE_SERVER
+        ? "http://localhost:3000/api/groq/chat"
+        : "/api/groq/chat";
       const MODEL = "llama-3.3-70b-versatile";
 
       let allData = [];

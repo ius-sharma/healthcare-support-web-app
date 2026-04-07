@@ -73,7 +73,7 @@ This runs silently after form submission — the patient sees a success message,
 | AI / LLM | Groq API — llama-3.3-70b-versatile        |
 | Storage  | localStorage (submissions) + `.env` (key) |
 | Fonts    | Google Fonts (DM Serif Display + DM Sans) |
-| Hosting  | Local Node server / static frontend        |
+| Hosting  | Local Node server / static frontend       |
 
 **No npm dependencies. No build step. Lightweight local backend proxy for AI calls.**
 
@@ -119,6 +119,7 @@ GROQ_API_KEY=your_key_here
 ```
 
 Notes:
+
 - Preferred key name is `GROQ_API_KEY`
 - `YOUR_GROQ_API_KEY` is also supported for backward compatibility
 
@@ -133,18 +134,46 @@ node server.js
 5. To view the admin dashboard, open http://localhost:3000/admin.html in the same browser (localStorage is shared)
 
 Optional (Live Server compatibility):
+
 - You can open pages on `127.0.0.1:5500`, but keep `node server.js` running on port `3000` for AI features.
+
+---
+
+## 🌐 Deploy on Vercel
+
+This repo is set up for a Vercel deployment as a static site plus one serverless API route.
+
+### What Vercel uses
+
+- `index.html` and `admin.html` as static pages
+- `api/groq/chat.js` as the Groq proxy function
+- `GROQ_API_KEY` as a project environment variable
+
+### Steps
+
+1. Push the latest code to GitHub.
+2. Import this repository into Vercel.
+3. Add an environment variable named `GROQ_API_KEY` in the Vercel project settings.
+4. Deploy with the default settings.
+5. Use the Vercel URL as the live hosted link for the assignment.
+
+### Notes
+
+- The browser never sees the Groq secret key.
+- AI requests go to `/api/groq/chat`, which Vercel serves through the serverless function.
+- `server.js` is only for local development and is not required for the hosted deployment.
 
 ---
 
 ## 📁 Project Structure
 
 ```
-medicare-ngo/
+healthcare-support-web-app/
 ├── index.html      # Main portal — registration forms + AI chatbot
 ├── admin.html      # Admin dashboard — submissions + triage + AI summary
 ├── app.js          # All JavaScript logic — forms, triage, chatbot
 ├── server.js       # Local backend proxy for Groq API + static serving
+├── api/groq/chat.js  # Vercel serverless function for Groq API calls
 ├── .env            # Local environment variables (not for public commits)
 └── README.md       # This file
 ```

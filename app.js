@@ -4,10 +4,12 @@
 // ============================================
 
 const MODEL = "llama-3.3-70b-versatile";
-const LOCAL_GROQ_API_URL =
-  window.location.port === "3000"
-    ? "/api/groq/chat"
-    : "http://localhost:3000/api/groq/chat";
+const IS_LIVE_SERVER =
+  window.location.hostname === "127.0.0.1" ||
+  window.location.hostname === "localhost";
+const LOCAL_GROQ_API_URL = IS_LIVE_SERVER
+  ? "http://localhost:3000/api/groq/chat"
+  : "/api/groq/chat";
 
 async function callGroq(messages, maxTokens = 1000) {
   const res = await fetch(LOCAL_GROQ_API_URL, {
