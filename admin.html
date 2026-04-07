@@ -9,7 +9,13 @@
       rel="stylesheet"
     />
     <style>
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
       :root {
         --bg: #f5f2ec;
@@ -55,33 +61,45 @@
         align-items: center;
         justify-content: space-between;
       }
-      .nav-left { display: flex; align-items: center; gap: 16px; }
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
       .nav-logo {
         font-family: "DM Serif Display", serif;
         color: #fff;
         font-size: 1.3rem;
       }
-      .nav-logo span { color: #7edaaa; }
+      .nav-logo span {
+        color: #7edaaa;
+      }
       .nav-badge {
-        background: rgba(255,255,255,0.15);
-        color: rgba(255,255,255,0.9);
+        background: rgba(255, 255, 255, 0.15);
+        color: rgba(255, 255, 255, 0.9);
         padding: 3px 10px;
         border-radius: 100px;
         font-size: 0.75rem;
         font-weight: 600;
         letter-spacing: 0.5px;
       }
-      .nav-right { display: flex; align-items: center; gap: 14px; }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
       .nav-link {
-        color: rgba(255,255,255,0.7);
+        color: rgba(255, 255, 255, 0.7);
         text-decoration: none;
         font-size: 0.88rem;
         font-weight: 500;
         transition: color 0.2s;
       }
-      .nav-link:hover { color: #fff; }
+      .nav-link:hover {
+        color: #fff;
+      }
       .refresh-btn {
-        background: rgba(255,255,255,0.15);
+        background: rgba(255, 255, 255, 0.15);
         color: #fff;
         border: none;
         padding: 8px 16px;
@@ -92,7 +110,9 @@
         cursor: pointer;
         transition: background 0.2s;
       }
-      .refresh-btn:hover { background: rgba(255,255,255,0.25); }
+      .refresh-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
 
       /* MAIN */
       .container {
@@ -116,7 +136,11 @@
         color: var(--text);
         line-height: 1.2;
       }
-      .page-sub { color: var(--muted); font-size: 0.88rem; margin-top: 4px; }
+      .page-sub {
+        color: var(--muted);
+        font-size: 0.88rem;
+        margin-top: 4px;
+      }
       .clear-btn {
         background: #fff;
         color: var(--accent);
@@ -129,7 +153,10 @@
         cursor: pointer;
         transition: all 0.2s;
       }
-      .clear-btn:hover { background: var(--accent); color: #fff; }
+      .clear-btn:hover {
+        background: var(--accent);
+        color: #fff;
+      }
 
       /* STATS ROW */
       .stats-row {
@@ -144,22 +171,46 @@
         border-radius: var(--radius);
         padding: 18px 20px;
         cursor: pointer;
-        transition: box-shadow 0.2s, transform 0.15s;
+        transition:
+          box-shadow 0.2s,
+          transform 0.15s;
       }
-      .stat-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-      .stat-card.active { border-color: var(--green); box-shadow: 0 0 0 2px rgba(26,107,74,0.15); }
+      .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      }
+      .stat-card.active {
+        border-color: var(--green);
+        box-shadow: 0 0 0 2px rgba(26, 107, 74, 0.15);
+      }
       .stat-num {
         font-family: "DM Serif Display", serif;
         font-size: 2rem;
         line-height: 1;
         margin-bottom: 4px;
       }
-      .stat-label { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-      .stat-card.all .stat-num { color: var(--green); }
-      .stat-card.high .stat-num { color: var(--high); }
-      .stat-card.medium .stat-num { color: var(--medium); }
-      .stat-card.low .stat-num { color: var(--low); }
-      .stat-card.pending .stat-num { color: var(--pending); }
+      .stat-label {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .stat-card.all .stat-num {
+        color: var(--green);
+      }
+      .stat-card.high .stat-num {
+        color: var(--high);
+      }
+      .stat-card.medium .stat-num {
+        color: var(--medium);
+      }
+      .stat-card.low .stat-num {
+        color: var(--low);
+      }
+      .stat-card.pending .stat-num {
+        color: var(--pending);
+      }
 
       /* FILTER ROW */
       .filter-row {
@@ -169,7 +220,12 @@
         flex-wrap: wrap;
         align-items: center;
       }
-      .filter-label { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-right: 4px; }
+      .filter-label {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--muted);
+        margin-right: 4px;
+      }
       .filter-btn {
         background: var(--surface);
         border: 1.5px solid var(--border);
@@ -182,11 +238,22 @@
         cursor: pointer;
         transition: all 0.2s;
       }
-      .filter-btn:hover { border-color: var(--green); color: var(--green); }
-      .filter-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
+      .filter-btn:hover {
+        border-color: var(--green);
+        color: var(--green);
+      }
+      .filter-btn.active {
+        background: var(--green);
+        color: #fff;
+        border-color: var(--green);
+      }
 
       /* SUBMISSIONS LIST */
-      .submissions-list { display: flex; flex-direction: column; gap: 14px; }
+      .submissions-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
 
       /* SUBMISSION CARD */
       .sub-card {
@@ -198,15 +265,31 @@
         animation: slideIn 0.2s ease;
       }
       @keyframes slideIn {
-        from { opacity: 0; transform: translateY(8px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
-      .sub-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+      .sub-card:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+      }
 
-      .sub-card.HIGH { border-left: 4px solid var(--high); }
-      .sub-card.MEDIUM { border-left: 4px solid var(--medium); }
-      .sub-card.LOW { border-left: 4px solid var(--low); }
-      .sub-card.null { border-left: 4px solid var(--pending); }
+      .sub-card.HIGH {
+        border-left: 4px solid var(--high);
+      }
+      .sub-card.MEDIUM {
+        border-left: 4px solid var(--medium);
+      }
+      .sub-card.LOW {
+        border-left: 4px solid var(--low);
+      }
+      .sub-card.null {
+        border-left: 4px solid var(--pending);
+      }
 
       .sub-header {
         padding: 16px 20px;
@@ -216,7 +299,12 @@
         gap: 12px;
         flex-wrap: wrap;
       }
-      .sub-header-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+      .sub-header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
 
       .type-badge {
         padding: 4px 10px;
@@ -226,9 +314,18 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
-      .type-badge.patient { background: #eff6ff; color: #1d4ed8; }
-      .type-badge.volunteer { background: #f5f3ff; color: #6d28d9; }
-      .type-badge.contact { background: #fff7ed; color: #c2410c; }
+      .type-badge.patient {
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+      .type-badge.volunteer {
+        background: #f5f3ff;
+        color: #6d28d9;
+      }
+      .type-badge.contact {
+        background: #fff7ed;
+        color: #c2410c;
+      }
 
       .priority-badge {
         padding: 4px 12px;
@@ -237,19 +334,56 @@
         font-weight: 700;
         letter-spacing: 0.5px;
       }
-      .priority-badge.HIGH { background: var(--high-bg); color: var(--high); border: 1px solid var(--high-border); }
-      .priority-badge.MEDIUM { background: var(--medium-bg); color: var(--medium); border: 1px solid var(--medium-border); }
-      .priority-badge.LOW { background: var(--low-bg); color: var(--low); border: 1px solid var(--low-border); }
-      .priority-badge.pending { background: var(--pending-bg); color: var(--pending); border: 1px solid var(--pending-border); }
+      .priority-badge.HIGH {
+        background: var(--high-bg);
+        color: var(--high);
+        border: 1px solid var(--high-border);
+      }
+      .priority-badge.MEDIUM {
+        background: var(--medium-bg);
+        color: var(--medium);
+        border: 1px solid var(--medium-border);
+      }
+      .priority-badge.LOW {
+        background: var(--low-bg);
+        color: var(--low);
+        border: 1px solid var(--low-border);
+      }
+      .priority-badge.pending {
+        background: var(--pending-bg);
+        color: var(--pending);
+        border: 1px solid var(--pending-border);
+      }
 
-      .sub-name { font-weight: 600; font-size: 0.95rem; }
-      .sub-time { font-size: 0.78rem; color: var(--muted); }
+      .sub-name {
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+      .sub-time {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
 
-      .sub-body { padding: 0 20px 16px; display: flex; flex-direction: column; gap: 8px; }
+      .sub-body {
+        padding: 0 20px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
 
-      .sub-row { display: flex; gap: 24px; flex-wrap: wrap; }
-      .sub-field { font-size: 0.83rem; color: var(--muted); }
-      .sub-field span { color: var(--text); font-weight: 500; }
+      .sub-row {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .sub-field {
+        font-size: 0.83rem;
+        color: var(--muted);
+      }
+      .sub-field span {
+        color: var(--text);
+        font-weight: 500;
+      }
 
       .sub-desc {
         background: var(--bg);
@@ -267,10 +401,28 @@
         font-size: 0.83rem;
         line-height: 1.5;
       }
-      .triage-box.HIGH { background: var(--high-bg); border: 1px solid var(--high-border); color: #991b1b; }
-      .triage-box.MEDIUM { background: var(--medium-bg); border: 1px solid var(--medium-border); color: #92400e; }
-      .triage-box.LOW { background: var(--low-bg); border: 1px solid var(--low-border); color: #14532d; }
-      .triage-title { font-weight: 700; margin-bottom: 2px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; }
+      .triage-box.HIGH {
+        background: var(--high-bg);
+        border: 1px solid var(--high-border);
+        color: #991b1b;
+      }
+      .triage-box.MEDIUM {
+        background: var(--medium-bg);
+        border: 1px solid var(--medium-border);
+        color: #92400e;
+      }
+      .triage-box.LOW {
+        background: var(--low-bg);
+        border: 1px solid var(--low-border);
+        color: #14532d;
+      }
+      .triage-title {
+        font-weight: 700;
+        margin-bottom: 2px;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
 
       /* EMPTY STATE */
       .empty-state {
@@ -278,9 +430,20 @@
         padding: 80px 20px;
         color: var(--muted);
       }
-      .empty-icon { font-size: 3rem; margin-bottom: 16px; }
-      .empty-title { font-family: "DM Serif Display", serif; font-size: 1.4rem; color: var(--text); margin-bottom: 8px; }
-      .empty-sub { font-size: 0.9rem; line-height: 1.6; }
+      .empty-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+      }
+      .empty-title {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.4rem;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+      .empty-sub {
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
       .empty-link {
         display: inline-block;
         margin-top: 20px;
@@ -293,10 +456,14 @@
         font-size: 0.9rem;
         transition: background 0.2s;
       }
-      .empty-link:hover { background: #0f4a34; }
+      .empty-link:hover {
+        background: #0f4a34;
+      }
 
       /* AI SUMMARY */
-      .ai-summary-section { margin-bottom: 28px; }
+      .ai-summary-section {
+        margin-bottom: 28px;
+      }
       .ai-summary-btn {
         background: var(--green);
         color: #fff;
@@ -312,8 +479,13 @@
         align-items: center;
         gap: 8px;
       }
-      .ai-summary-btn:hover { background: #0f4a34; }
-      .ai-summary-btn:disabled { opacity: 0.6; cursor: default; }
+      .ai-summary-btn:hover {
+        background: #0f4a34;
+      }
+      .ai-summary-btn:disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
       .ai-summary-box {
         display: none;
         margin-top: 14px;
@@ -322,7 +494,9 @@
         border-radius: var(--radius);
         padding: 20px 24px;
       }
-      .ai-summary-box.visible { display: block; }
+      .ai-summary-box.visible {
+        display: block;
+      }
       .ai-summary-header {
         display: flex;
         align-items: center;
@@ -340,16 +514,21 @@
       }
 
       @media (max-width: 768px) {
-        .stats-row { grid-template-columns: repeat(3, 1fr); }
-        nav { padding: 14px 18px; }
+        .stats-row {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        nav {
+          padding: 14px 18px;
+        }
       }
       @media (max-width: 480px) {
-        .stats-row { grid-template-columns: repeat(2, 1fr); }
+        .stats-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
     </style>
   </head>
   <body>
-
     <nav>
       <div class="nav-left">
         <div class="nav-logo">Medi<span>Care</span> NGO</div>
@@ -357,23 +536,32 @@
       </div>
       <div class="nav-right">
         <a href="index.html" class="nav-link">← Back to Portal</a>
-        <button class="refresh-btn" onclick="loadDashboard()">🔄 Refresh</button>
+        <button class="refresh-btn" onclick="loadDashboard()">
+          🔄 Refresh
+        </button>
       </div>
     </nav>
 
     <div class="container">
-
       <div class="page-header">
         <div>
           <div class="page-title">Submissions Dashboard</div>
-          <div class="page-sub">All patient requests, volunteer signups, and contacts — with AI triage priority</div>
+          <div class="page-sub">
+            All patient requests, volunteer signups, and contacts — with AI
+            triage priority
+          </div>
         </div>
-        <button class="clear-btn" onclick="clearAll()">🗑 Clear All Data</button>
+        <button class="clear-btn" onclick="clearAll()">
+          🗑 Clear All Data
+        </button>
       </div>
 
       <!-- STATS -->
       <div class="stats-row">
-        <div class="stat-card all active" onclick="filterByPriority('all', this)">
+        <div
+          class="stat-card all active"
+          onclick="filterByPriority('all', this)"
+        >
           <div class="stat-num" id="count-all">0</div>
           <div class="stat-label">Total</div>
         </div>
@@ -381,7 +569,10 @@
           <div class="stat-num" id="count-high">0</div>
           <div class="stat-label">🔴 High</div>
         </div>
-        <div class="stat-card medium" onclick="filterByPriority('MEDIUM', this)">
+        <div
+          class="stat-card medium"
+          onclick="filterByPriority('MEDIUM', this)"
+        >
           <div class="stat-num" id="count-medium">0</div>
           <div class="stat-label">🟡 Medium</div>
         </div>
@@ -389,7 +580,10 @@
           <div class="stat-num" id="count-low">0</div>
           <div class="stat-label">🟢 Low</div>
         </div>
-        <div class="stat-card pending" onclick="filterByPriority('pending', this)">
+        <div
+          class="stat-card pending"
+          onclick="filterByPriority('pending', this)"
+        >
           <div class="stat-num" id="count-pending">0</div>
           <div class="stat-label">⏳ Pending</div>
         </div>
@@ -397,7 +591,11 @@
 
       <!-- AI SUMMARY -->
       <div class="ai-summary-section">
-        <button class="ai-summary-btn" id="summaryBtn" onclick="generateSummary()">
+        <button
+          class="ai-summary-btn"
+          id="summaryBtn"
+          onclick="generateSummary()"
+        >
           ✨ Generate AI Summary Report
         </button>
         <div class="ai-summary-box" id="summaryBox">
@@ -409,21 +607,29 @@
       <!-- FILTERS -->
       <div class="filter-row">
         <span class="filter-label">Filter by type:</span>
-        <button class="filter-btn active" onclick="filterByType('all', this)">All</button>
-        <button class="filter-btn" onclick="filterByType('patient', this)">🏥 Patients</button>
-        <button class="filter-btn" onclick="filterByType('volunteer', this)">🤝 Volunteers</button>
-        <button class="filter-btn" onclick="filterByType('contact', this)">✉️ Contacts</button>
+        <button class="filter-btn active" onclick="filterByType('all', this)">
+          All
+        </button>
+        <button class="filter-btn" onclick="filterByType('patient', this)">
+          🏥 Patients
+        </button>
+        <button class="filter-btn" onclick="filterByType('volunteer', this)">
+          🤝 Volunteers
+        </button>
+        <button class="filter-btn" onclick="filterByType('contact', this)">
+          ✉️ Contacts
+        </button>
       </div>
 
       <!-- SUBMISSIONS -->
       <div class="submissions-list" id="submissionsList"></div>
-
     </div>
 
     <script>
-      window.GROQ_API_KEY = "YOUR_GROQ_API_KEY";
-
-      const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+      const GROQ_API_URL =
+        window.location.port === "3000"
+          ? "/api/groq/chat"
+          : "http://localhost:3000/api/groq/chat";
       const MODEL = "llama-3.3-70b-versatile";
 
       let allData = [];
@@ -436,28 +642,47 @@
 
       function formatTime(iso) {
         const d = new Date(iso);
-        return d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) +
-          " · " + d.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
+        return (
+          d.toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          }) +
+          " · " +
+          d.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })
+        );
       }
 
       function updateStats(data) {
         document.getElementById("count-all").textContent = data.length;
-        document.getElementById("count-high").textContent = data.filter(d => d.priority === "HIGH").length;
-        document.getElementById("count-medium").textContent = data.filter(d => d.priority === "MEDIUM").length;
-        document.getElementById("count-low").textContent = data.filter(d => d.priority === "LOW").length;
-        document.getElementById("count-pending").textContent = data.filter(d => !d.priority).length;
+        document.getElementById("count-high").textContent = data.filter(
+          (d) => d.priority === "HIGH",
+        ).length;
+        document.getElementById("count-medium").textContent = data.filter(
+          (d) => d.priority === "MEDIUM",
+        ).length;
+        document.getElementById("count-low").textContent = data.filter(
+          (d) => d.priority === "LOW",
+        ).length;
+        document.getElementById("count-pending").textContent = data.filter(
+          (d) => !d.priority,
+        ).length;
       }
 
       function filterByPriority(p, el) {
         currentPriorityFilter = p;
-        document.querySelectorAll(".stat-card").forEach(c => c.classList.remove("active"));
+        document
+          .querySelectorAll(".stat-card")
+          .forEach((c) => c.classList.remove("active"));
         el.classList.add("active");
         renderList();
       }
 
       function filterByType(t, el) {
         currentTypeFilter = t;
-        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((b) => b.classList.remove("active"));
         el.classList.add("active");
         renderList();
       }
@@ -466,14 +691,14 @@
         let data = [...allData];
 
         if (currentTypeFilter !== "all") {
-          data = data.filter(d => d.type === currentTypeFilter);
+          data = data.filter((d) => d.type === currentTypeFilter);
         }
 
         if (currentPriorityFilter !== "all") {
           if (currentPriorityFilter === "pending") {
-            data = data.filter(d => !d.priority);
+            data = data.filter((d) => !d.priority);
           } else {
-            data = data.filter(d => d.priority === currentPriorityFilter);
+            data = data.filter((d) => d.priority === currentPriorityFilter);
           }
         }
 
@@ -490,7 +715,7 @@
           return;
         }
 
-        list.innerHTML = data.map(entry => buildCard(entry)).join("");
+        list.innerHTML = data.map((entry) => buildCard(entry)).join("");
       }
 
       function buildCard(entry) {
@@ -550,9 +775,11 @@
               <div class="sub-header-left">
                 <span class="type-badge ${type}">${type}</span>
                 <span class="sub-name">${data.name || "—"}</span>
-                ${priority
-                  ? `<span class="priority-badge ${priority}">${priority} PRIORITY</span>`
-                  : `<span class="priority-badge pending">⏳ ANALYZING</span>`}
+                ${
+                  priority
+                    ? `<span class="priority-badge ${priority}">${priority} PRIORITY</span>`
+                    : `<span class="priority-badge pending">⏳ ANALYZING</span>`
+                }
               </div>
               <span class="sub-time">${formatTime(timestamp)}</span>
             </div>
@@ -594,17 +821,18 @@
         box.classList.add("visible");
         text.textContent = "Analyzing all submissions...";
 
-        const summary = data.map(e => {
-          const d = e.data;
-          return `[${e.type.toUpperCase()}] ${d.name || "Unknown"} | Priority: ${e.priority || "unanalyzed"} | ${e.triage?.reason || d.desc || d.msg || d.why || "No description"}`;
-        }).join("\n");
+        const summary = data
+          .map((e) => {
+            const d = e.data;
+            return `[${e.type.toUpperCase()}] ${d.name || "Unknown"} | Priority: ${e.priority || "unanalyzed"} | ${e.triage?.reason || d.desc || d.msg || d.why || "No description"}`;
+          })
+          .join("\n");
 
         try {
           const res = await fetch(GROQ_API_URL, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": `Bearer ${window.GROQ_API_KEY}`,
             },
             body: JSON.stringify({
               model: MODEL,
@@ -612,7 +840,8 @@
               messages: [
                 {
                   role: "system",
-                  content: "You are a healthcare NGO operations analyst. Given a list of patient/volunteer/contact submissions, write a brief operational summary. Include: total counts, how many need urgent attention, top concerns, and 2-3 recommended actions for the NGO team. Be concise, clear, and actionable. Use plain text, no markdown.",
+                  content:
+                    "You are a healthcare NGO operations analyst. Given a list of patient/volunteer/contact submissions, write a brief operational summary. Include: total counts, how many need urgent attention, top concerns, and 2-3 recommended actions for the NGO team. Be concise, clear, and actionable. Use plain text, no markdown.",
                 },
                 {
                   role: "user",
@@ -623,9 +852,13 @@
           });
 
           const result = await res.json();
+          if (!res.ok) {
+            throw new Error(result.error || "Summary request failed");
+          }
           text.textContent = result.choices[0].message.content;
         } catch (err) {
-          text.textContent = "Failed to generate summary. Please check your connection and try again.";
+          text.textContent =
+            "Failed to generate summary. Please check your connection and try again.";
         }
 
         btn.disabled = false;

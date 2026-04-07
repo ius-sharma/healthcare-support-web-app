@@ -3,8 +3,31 @@
 // Using Groq API (llama-3.3-70b-versatile)
 // ============================================
 
-const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 const MODEL = "llama-3.3-70b-versatile";
+const LOCAL_GROQ_API_URL =
+  window.location.port === "3000"
+    ? "/api/groq/chat"
+    : "http://localhost:3000/api/groq/chat";
+
+async function callGroq(messages, maxTokens = 1000) {
+  const res = await fetch(LOCAL_GROQ_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      max_tokens: maxTokens,
+      messages,
+    }),
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error || "AI request failed");
+  }
+  return data;
+}
 
 // ============================================
 // SECTION 1: FORM DATA STORAGE
@@ -13,7 +36,9 @@ const MODEL = "llama-3.3-70b-versatile";
 // ============================================
 
 function saveSubmission(type, data) {
-  const existing = JSON.parse(localStorage.getItem("medicare_submissions") || "[]");
+  const existing = JSON.parse(
+    localStorage.getItem("medicare_submissions") || "[]",
+  );
   const entry = {
     id: Date.now(),
     type,
@@ -41,7 +66,9 @@ function switchTab(tab, el) {
   document.getElementById("volunteerForm").style.display = "none";
   document.getElementById("contactForm").style.display = "none";
   document.getElementById(tab + "Form").style.display = "block";
-  document.querySelectorAll(".tab").forEach((t) => t.classList.remove("active"));
+  document
+    .querySelectorAll(".tab")
+    .forEach((t) => t.classList.remove("active"));
   el.classList.add("active");
 }
 
@@ -66,7 +93,6 @@ async function submitForm(type) {
     }
 
     formData = { name, age, phone, city, need, desc };
-
   } else if (type === "volunteer") {
     const name = document.getElementById("v-name").value.trim();
     const phone = document.getElementById("v-phone").value.trim();
@@ -81,7 +107,6 @@ async function submitForm(type) {
     }
 
     formData = { name, phone, email, skill, avail, why };
-
   } else if (type === "contact") {
     const name = document.getElementById("c-name").value.trim();
     const email = document.getElementById("c-email").value.trim();
@@ -127,33 +152,20 @@ Assess urgency. Respond ONLY with a valid JSON object, no extra text:
 }`;
 
   try {
-    const res = await fetch(GROQ_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${window.GROQ_API_KEY || ""}`,
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 1000,
-        messages: [
-          {
-            role: "system",
-            content: `You are a medical triage assistant for an NGO in India.
+    const data = await callGroq([
+      {
+        role: "system",
+        content: `You are a medical triage assistant for an NGO in India.
 HIGH = immediate attention needed (emergency symptoms, elderly alone, mental health crisis, chest pain, difficulty breathing).
 MEDIUM = needs help within 48 hours.
 LOW = can be scheduled for next available slot.
 Always respond with ONLY a valid JSON object. No explanation outside the JSON.`,
-          },
-          {
-            role: "user",
-            content: userPrompt,
-          },
-        ],
-      }),
-    });
-
-    const data = await res.json();
+      },
+      {
+        role: "user",
+        content: userPrompt,
+      },
+    ]);
     const raw = data.choices[0].message.content;
     const clean = raw.replace(/```json|```/g, "").trim();
     const triage = JSON.parse(clean);
@@ -226,23 +238,10 @@ async function sendChat() {
   const typing = addMsg("Typing...", "typing");
 
   try {
-    const res = await fetch(GROQ_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${window.GROQ_API_KEY || ""}`,
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 1000,
-        messages: [
-          { role: "system", content: CHAT_SYSTEM_PROMPT },
-          ...chatHistory,
-        ],
-      }),
-    });
-
-    const data = await res.json();
+    const data = await callGroq([
+      { role: "system", content: CHAT_SYSTEM_PROMPT },
+      ...chatHistory,
+    ]);
     typing.remove();
 
     const reply = data.choices[0].message.content;
@@ -252,10 +251,12 @@ async function sendChat() {
 
     // Keep last 10 turns only
     if (chatHistory.length > 20) chatHistory.splice(0, 2);
-
   } catch (err) {
     typing.remove();
-    addMsg("Connection issue. For urgent help please call 108 or register via the form above.", "bot");
+    addMsg(
+      "Connection issue. For urgent help please call 108 or register via the form above.",
+      "bot",
+    );
   }
 
   sendBtn.disabled = false;

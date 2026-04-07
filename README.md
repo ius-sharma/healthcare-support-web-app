@@ -111,17 +111,21 @@ git clone
 cd medicare-ngo
 ```
 
-2. Add your Groq API key in `index.html` and `admin.html`:
+2. Add your Groq API key in `.env`:
 
-```html
-<script>
-  window.GROQ_API_KEY = "your_key_here";
-</script>
+```env
+GROQ_API_KEY=your_key_here
 ```
 
-3. Open `index.html` with Live Server (VS Code) or any local server
+3. Start the local server:
 
-4. To view the admin dashboard, open `admin.html` in the same browser (localStorage is shared)
+```bash
+node server.js
+```
+
+4. Open http://localhost:3000 in your browser
+
+5. To view the admin dashboard, open http://localhost:3000/admin.html in the same browser (localStorage is shared)
 
 ---
 
@@ -139,7 +143,7 @@ medicare-ngo/
 
 ## 🔐 API Key Note
 
-The Groq API key is set as a browser variable in the HTML. For production use, this should be moved to a serverless backend (e.g., Vercel Edge Functions) to keep the key hidden. For this assignment/demo, the key is set locally and the placeholder `YOUR_GROQ_API_KEY` is committed to the repo.
+The Groq API key is read server-side from `.env` and never exposed to browser JavaScript.
 
 ---
 

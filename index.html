@@ -52,8 +52,13 @@
         font-size: 1.5rem;
         letter-spacing: -0.5px;
       }
-      .nav-logo span { color: #7edaaa; }
-      .nav-links { display: flex; gap: 28px; }
+      .nav-logo span {
+        color: #7edaaa;
+      }
+      .nav-links {
+        display: flex;
+        gap: 28px;
+      }
       .nav-links a {
         color: rgba(255, 255, 255, 0.75);
         text-decoration: none;
@@ -61,7 +66,9 @@
         font-weight: 500;
         transition: color 0.2s;
       }
-      .nav-links a:hover { color: #fff; }
+      .nav-links a:hover {
+        color: #fff;
+      }
 
       /* HERO */
       .hero {
@@ -76,7 +83,11 @@
         position: absolute;
         width: 500px;
         height: 500px;
-        background: radial-gradient(circle, rgba(125, 218, 170, 0.15) 0%, transparent 70%);
+        background: radial-gradient(
+          circle,
+          rgba(125, 218, 170, 0.15) 0%,
+          transparent 70%
+        );
         top: -100px;
         right: -100px;
         border-radius: 50%;
@@ -102,7 +113,10 @@
         max-width: 700px;
         margin: 0 auto 20px;
       }
-      .hero h1 em { color: #7edaaa; font-style: italic; }
+      .hero h1 em {
+        color: #7edaaa;
+        font-style: italic;
+      }
       .hero p {
         color: rgba(255, 255, 255, 0.7);
         max-width: 520px;
@@ -110,7 +124,12 @@
         font-size: 1.05rem;
         line-height: 1.7;
       }
-      .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+      .hero-ctas {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
       .btn-primary {
         background: var(--accent);
         color: #fff;
@@ -120,7 +139,9 @@
         font-size: 0.95rem;
         font-weight: 600;
         cursor: pointer;
-        transition: transform 0.15s, box-shadow 0.15s;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
         font-family: "DM Sans", sans-serif;
       }
       .btn-primary:hover {
@@ -139,7 +160,9 @@
         transition: background 0.2s;
         font-family: "DM Sans", sans-serif;
       }
-      .btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
+      .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
 
       /* STATS BAR */
       .stats-bar {
@@ -151,13 +174,20 @@
         border-bottom: 1px solid var(--border);
         flex-wrap: wrap;
       }
-      .stat { text-align: center; }
+      .stat {
+        text-align: center;
+      }
       .stat-num {
         font-family: "DM Serif Display", serif;
         font-size: 2rem;
         color: var(--green);
       }
-      .stat-label { font-size: 0.82rem; color: var(--muted); font-weight: 500; margin-top: 2px; }
+      .stat-label {
+        font-size: 0.82rem;
+        color: var(--muted);
+        font-weight: 500;
+        margin-top: 2px;
+      }
 
       /* MAIN LAYOUT */
       .main {
@@ -194,9 +224,19 @@
         justify-content: center;
         font-size: 1.1rem;
       }
-      .card-title { color: #fff; font-weight: 600; font-size: 1.1rem; }
-      .card-sub { color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; margin-top: 2px; }
-      .card-body { padding: 28px; }
+      .card-title {
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+      .card-sub {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.8rem;
+        margin-top: 2px;
+      }
+      .card-body {
+        padding: 28px;
+      }
 
       /* FORM */
       .tab-row {
@@ -224,7 +264,9 @@
         color: var(--green);
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
       }
-      .form-group { margin-bottom: 18px; }
+      .form-group {
+        margin-bottom: 18px;
+      }
       .form-group label {
         display: block;
         font-size: 0.84rem;
@@ -232,7 +274,10 @@
         color: var(--text);
         margin-bottom: 7px;
       }
-      .form-group label .req { color: var(--accent); margin-left: 2px; }
+      .form-group label .req {
+        color: var(--accent);
+        margin-left: 2px;
+      }
       .form-group input,
       .form-group select,
       .form-group textarea {
@@ -244,7 +289,9 @@
         font-size: 0.92rem;
         color: var(--text);
         background: var(--bg);
-        transition: border-color 0.2s, box-shadow 0.2s;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
         outline: none;
       }
       .form-group input:focus,
@@ -253,8 +300,15 @@
         border-color: var(--green-mid);
         box-shadow: 0 0 0 3px rgba(45, 151, 104, 0.12);
       }
-      .form-group textarea { resize: vertical; min-height: 80px; }
-      .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
       .submit-btn {
         width: 100%;
         background: var(--green);
@@ -266,10 +320,15 @@
         font-size: 0.95rem;
         font-weight: 600;
         cursor: pointer;
-        transition: background 0.2s, transform 0.15s;
+        transition:
+          background 0.2s,
+          transform 0.15s;
         margin-top: 8px;
       }
-      .submit-btn:hover { background: #0f4a34; transform: translateY(-1px); }
+      .submit-btn:hover {
+        background: #0f4a34;
+        transform: translateY(-1px);
+      }
       .success-msg {
         display: none;
         background: var(--green-light);
@@ -306,8 +365,14 @@
         animation: fadeUp 0.2s ease;
       }
       @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(6px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
       .msg.bot {
         background: var(--surface);
@@ -329,7 +394,12 @@
         align-self: flex-start;
         font-style: italic;
       }
-      .chat-quick { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+      .chat-quick {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
       .quick-btn {
         background: var(--green-light);
         color: var(--green);
@@ -342,8 +412,13 @@
         transition: background 0.2s;
         font-family: "DM Sans", sans-serif;
       }
-      .quick-btn:hover { background: #b8e8cc; }
-      .chat-input-row { display: flex; gap: 10px; }
+      .quick-btn:hover {
+        background: #b8e8cc;
+      }
+      .chat-input-row {
+        display: flex;
+        gap: 10px;
+      }
       .chat-input-row input {
         flex: 1;
         padding: 11px 16px;
@@ -355,7 +430,9 @@
         outline: none;
         transition: border-color 0.2s;
       }
-      .chat-input-row input:focus { border-color: var(--green-mid); }
+      .chat-input-row input:focus {
+        border-color: var(--green-mid);
+      }
       .send-btn {
         background: var(--green);
         color: #fff;
@@ -366,8 +443,13 @@
         font-size: 1rem;
         transition: background 0.2s;
       }
-      .send-btn:hover { background: #0f4a34; }
-      .send-btn:disabled { opacity: 0.5; cursor: default; }
+      .send-btn:hover {
+        background: #0f4a34;
+      }
+      .send-btn:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
       .ai-badge {
         display: inline-flex;
         align-items: center;
@@ -383,19 +465,36 @@
       }
 
       /* FULL WIDTH */
-      .full-width { grid-column: 1 / -1; }
+      .full-width {
+        grid-column: 1 / -1;
+      }
 
       /* INFO CARDS */
-      .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
       .info-card {
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: var(--radius);
         padding: 24px;
       }
-      .info-icon { font-size: 2rem; margin-bottom: 12px; }
-      .info-title { font-weight: 700; margin-bottom: 6px; font-size: 1rem; }
-      .info-text { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+      .info-icon {
+        font-size: 2rem;
+        margin-bottom: 12px;
+      }
+      .info-title {
+        font-weight: 700;
+        margin-bottom: 6px;
+        font-size: 1rem;
+      }
+      .info-text {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.6;
+      }
 
       /* FOOTER */
       footer {
@@ -403,21 +502,29 @@
         padding: 30px;
         color: var(--muted);
         font-size: 0.83rem;
-        border-top: 1px solid var(--border);
         background: var(--surface);
       }
 
       @media (max-width: 768px) {
-        .main { grid-template-columns: 1fr; }
-        .info-grid { grid-template-columns: 1fr; }
-        .stats-bar { gap: 28px; }
-        nav { padding: 16px 20px; }
-        .nav-links { display: none; }
+        .main {
+          grid-template-columns: 1fr;
+        }
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+        .stats-bar {
+          gap: 28px;
+        }
+        nav {
+          padding: 16px 20px;
+        }
+        .nav-links {
+          display: none;
+        }
       }
     </style>
   </head>
   <body>
-
     <nav>
       <div class="nav-logo">Medi<span>Care</span> NGO</div>
       <div class="nav-links">
@@ -436,24 +543,49 @@
         assistant any health access questions — we're here to help.
       </p>
       <div class="hero-ctas">
-        <button class="btn-primary" onclick="document.querySelector('.main').scrollIntoView({ behavior: 'smooth' })">
+        <button
+          class="btn-primary"
+          onclick="
+            document
+              .querySelector('.main')
+              .scrollIntoView({ behavior: 'smooth' })
+          "
+        >
           Register Now
         </button>
-        <button class="btn-outline" onclick="document.getElementById('chatSection').scrollIntoView({ behavior: 'smooth' })">
+        <button
+          class="btn-outline"
+          onclick="
+            document
+              .getElementById('chatSection')
+              .scrollIntoView({ behavior: 'smooth' })
+          "
+        >
           Ask Our AI ↓
         </button>
       </div>
     </div>
 
     <div class="stats-bar">
-      <div class="stat"><div class="stat-num">4,200+</div><div class="stat-label">Patients Supported</div></div>
-      <div class="stat"><div class="stat-num">380</div><div class="stat-label">Active Volunteers</div></div>
-      <div class="stat"><div class="stat-num">12</div><div class="stat-label">Districts Covered</div></div>
-      <div class="stat"><div class="stat-num">Free</div><div class="stat-label">All Services</div></div>
+      <div class="stat">
+        <div class="stat-num">4,200+</div>
+        <div class="stat-label">Patients Supported</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">380</div>
+        <div class="stat-label">Active Volunteers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Districts Covered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Free</div>
+        <div class="stat-label">All Services</div>
+      </div>
     </div>
 
     <div class="main">
-
       <!-- FORM CARD -->
       <div class="card">
         <div class="card-header">
@@ -465,9 +597,15 @@
         </div>
         <div class="card-body">
           <div class="tab-row">
-            <button class="tab active" onclick="switchTab('patient', this)">🏥 Patient Support</button>
-            <button class="tab" onclick="switchTab('volunteer', this)">🤝 Volunteer</button>
-            <button class="tab" onclick="switchTab('contact', this)">✉️ Contact</button>
+            <button class="tab active" onclick="switchTab('patient', this)">
+              🏥 Patient Support
+            </button>
+            <button class="tab" onclick="switchTab('volunteer', this)">
+              🤝 Volunteer
+            </button>
+            <button class="tab" onclick="switchTab('contact', this)">
+              ✉️ Contact
+            </button>
           </div>
 
           <!-- Patient Form -->
@@ -479,7 +617,13 @@
               </div>
               <div class="form-group">
                 <label>Age <span class="req">*</span></label>
-                <input type="number" placeholder="35" min="1" max="120" id="p-age" />
+                <input
+                  type="number"
+                  placeholder="35"
+                  min="1"
+                  max="120"
+                  id="p-age"
+                />
               </div>
             </div>
             <div class="form-group">
@@ -504,10 +648,17 @@
             </div>
             <div class="form-group">
               <label>Brief Description</label>
-              <textarea placeholder="Describe your situation briefly..." id="p-desc"></textarea>
+              <textarea
+                placeholder="Describe your situation briefly..."
+                id="p-desc"
+              ></textarea>
             </div>
-            <button class="submit-btn" onclick="submitForm('patient')">Submit Patient Request →</button>
-            <div class="success-msg" id="patient-success">✅ Request submitted! Our team will contact you within 24 hours.</div>
+            <button class="submit-btn" onclick="submitForm('patient')">
+              Submit Patient Request →
+            </button>
+            <div class="success-msg" id="patient-success">
+              ✅ Request submitted! Our team will contact you within 24 hours.
+            </div>
           </div>
 
           <!-- Volunteer Form -->
@@ -551,10 +702,17 @@
             </div>
             <div class="form-group">
               <label>Why do you want to volunteer?</label>
-              <textarea placeholder="Share your motivation..." id="v-why"></textarea>
+              <textarea
+                placeholder="Share your motivation..."
+                id="v-why"
+              ></textarea>
             </div>
-            <button class="submit-btn" onclick="submitForm('volunteer')">Join as Volunteer →</button>
-            <div class="success-msg" id="volunteer-success">✅ Welcome aboard! We'll reach out with onboarding details soon.</div>
+            <button class="submit-btn" onclick="submitForm('volunteer')">
+              Join as Volunteer →
+            </button>
+            <div class="success-msg" id="volunteer-success">
+              ✅ Welcome aboard! We'll reach out with onboarding details soon.
+            </div>
           </div>
 
           <!-- Contact Form -->
@@ -569,14 +727,26 @@
             </div>
             <div class="form-group">
               <label>Subject</label>
-              <input type="text" placeholder="Partnership / Media / General" id="c-subj" />
+              <input
+                type="text"
+                placeholder="Partnership / Media / General"
+                id="c-subj"
+              />
             </div>
             <div class="form-group">
               <label>Message <span class="req">*</span></label>
-              <textarea placeholder="Your message..." id="c-msg" style="min-height: 120px"></textarea>
+              <textarea
+                placeholder="Your message..."
+                id="c-msg"
+                style="min-height: 120px"
+              ></textarea>
             </div>
-            <button class="submit-btn" onclick="submitForm('contact')">Send Message →</button>
-            <div class="success-msg" id="contact-success">✅ Message received! We typically reply within 48 hours.</div>
+            <button class="submit-btn" onclick="submitForm('contact')">
+              Send Message →
+            </button>
+            <div class="success-msg" id="contact-success">
+              ✅ Message received! We typically reply within 48 hours.
+            </div>
           </div>
         </div>
       </div>
@@ -591,21 +761,51 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="ai-badge">✨ AI-Powered — Real answers, not scripted responses</div>
+          <div class="ai-badge">
+            ✨ AI-Powered — Real answers, not scripted responses
+          </div>
           <div class="chat-quick">
-            <button class="quick-btn" onclick="askQuick('How do I register for patient support?')">How to register?</button>
-            <button class="quick-btn" onclick="askQuick('What services does this NGO provide?')">Our services</button>
-            <button class="quick-btn" onclick="askQuick('How can I become a volunteer?')">Volunteer info</button>
-            <button class="quick-btn" onclick="askQuick('Is this service free of cost?')">Is it free?</button>
+            <button
+              class="quick-btn"
+              onclick="askQuick('How do I register for patient support?')"
+            >
+              How to register?
+            </button>
+            <button
+              class="quick-btn"
+              onclick="askQuick('What services does this NGO provide?')"
+            >
+              Our services
+            </button>
+            <button
+              class="quick-btn"
+              onclick="askQuick('How can I become a volunteer?')"
+            >
+              Volunteer info
+            </button>
+            <button
+              class="quick-btn"
+              onclick="askQuick('Is this service free of cost?')"
+            >
+              Is it free?
+            </button>
           </div>
           <div class="chat-window" id="chatWindow">
             <div class="msg bot">
-              👋 Hi! I'm the MediCare Support AI. Ask me anything about our healthcare programs, how to register, volunteering, or general health access questions. I'm here to help!
+              👋 Hi! I'm the MediCare Support AI. Ask me anything about our
+              healthcare programs, how to register, volunteering, or general
+              health access questions. I'm here to help!
             </div>
           </div>
           <div class="chat-input-row">
-            <input type="text" id="chatInput" placeholder="Type your question..." />
-            <button class="send-btn" id="sendBtn" onclick="sendChat()">➤</button>
+            <input
+              type="text"
+              id="chatInput"
+              placeholder="Type your question..."
+            />
+            <button class="send-btn" id="sendBtn" onclick="sendChat()">
+              ➤
+            </button>
           </div>
         </div>
       </div>
@@ -616,30 +816,37 @@
           <div class="info-card">
             <div class="info-icon">🏥</div>
             <div class="info-title">Patient Support Program</div>
-            <div class="info-text">Free medical consultations, referrals to specialists, and medicine access for underprivileged patients across 12 districts.</div>
+            <div class="info-text">
+              Free medical consultations, referrals to specialists, and medicine
+              access for underprivileged patients across 12 districts.
+            </div>
           </div>
           <div class="info-card">
             <div class="info-icon">🧠</div>
             <div class="info-title">Mental Health Helpline</div>
-            <div class="info-text">Confidential counseling sessions with certified professionals. Available Monday to Saturday, 9AM–6PM.</div>
+            <div class="info-text">
+              Confidential counseling sessions with certified professionals.
+              Available Monday to Saturday, 9AM–6PM.
+            </div>
           </div>
           <div class="info-card">
             <div class="info-icon">🚑</div>
             <div class="info-title">Emergency Assistance</div>
-            <div class="info-text">24/7 coordination for medical emergencies including ambulance tie-ups, hospital navigation, and crisis support.</div>
+            <div class="info-text">
+              24/7 coordination for medical emergencies including ambulance
+              tie-ups, hospital navigation, and crisis support.
+            </div>
           </div>
         </div>
       </div>
-
     </div>
 
     <footer>
-      © 2026 MediCare NGO · Built with ❤️ for community health access · All services free of charge
+      © 2026 MediCare NGO · Built with ❤️ for community health access · All
+      services free of charge
     </footer>
 
     <!-- ✅ ONLY these scripts at bottom of body — no other JS anywhere -->
-    <script>window.GROQ_API_KEY = "YOUR_GROQ_API_KEY";</script>
     <script src="app.js"></script>
-
   </body>
 </html>
