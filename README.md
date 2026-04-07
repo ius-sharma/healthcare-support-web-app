@@ -2,8 +2,8 @@
 
 > A fully functional AI-powered healthcare support portal built for NGOs serving underprivileged communities across India.
 
-🔗 **Live Demo:** [](#) ← replace after deploy  
-📁 **Admin Dashboard:** [](#)
+🔗 **Live Demo:** https://healthcare-support-web-app-wmp3.vercel.app/
+📁 **Admin Dashboard:** https://healthcare-support-web-app-wmp3.vercel.app/admin.html
 
 ---
 
@@ -17,6 +17,7 @@ Instead of just building a basic form, I built a full support portal with:
 - A live AI chatbot powered by Groq (Llama 3.3 70B)
 - An automatic AI triage system that scores patient urgency in the background
 - An admin dashboard where NGO staff can monitor all submissions with priority flags
+- Standalone informational pages for About, Programs, Volunteer, and Contact
 
 ---
 
@@ -44,7 +45,7 @@ When a patient submits a request with a description, the app **automatically cal
 
 - 🔴 **HIGH** — immediate attention needed (chest pain, elderly alone, mental health crisis)
 - 🟡 **MEDIUM** — needs help within 48 hours
-- 🟢 **LOW** — can be scheduled for next available slot
+- 🟢 **LOW** — can be scheduled for the next available slot
 
 Each triage result includes:
 
@@ -62,6 +63,13 @@ This runs silently after form submission — the patient sees a success message,
 - Full triage reasoning visible per card
 - **"Generate AI Summary Report"** — one click sends all submissions to Groq and gets an operational summary with recommended actions for the team
 
+### 5. 📄 Supporting Pages
+
+- **About** — explains the mission, approach, and impact of the project
+- **Programs** — outlines the support categories and workflow
+- **Volunteer** — describes how volunteers can contribute
+- **Contact** — explains how to reach the team or submit a contact request
+
 ---
 
 ## 🛠 Tech Stack
@@ -73,7 +81,7 @@ This runs silently after form submission — the patient sees a success message,
 | AI / LLM | Groq API — llama-3.3-70b-versatile        |
 | Storage  | localStorage (submissions) + `.env` (key) |
 | Fonts    | Google Fonts (DM Serif Display + DM Sans) |
-| Hosting  | Local Node server / static frontend       |
+| Hosting  | Vercel / local Node server for development |
 
 **No npm dependencies. No build step. Lightweight local backend proxy for AI calls.**
 
@@ -163,6 +171,8 @@ This repo is set up for a Vercel deployment as a static site plus one serverless
 - AI requests go to `/api/groq/chat`, which Vercel serves through the serverless function.
 - `server.js` is only for local development and is not required for the hosted deployment.
 
+For the best assignment submission, use the Vercel URL as the live hosted link and keep the GitHub repo link in the submission notes.
+
 ---
 
 ## 📁 Project Structure
@@ -173,7 +183,11 @@ healthcare-support-web-app/
 ├── admin.html      # Admin dashboard — submissions + triage + AI summary
 ├── app.js          # All JavaScript logic — forms, triage, chatbot
 ├── server.js       # Local backend proxy for Groq API + static serving
-├── api/groq/chat.js  # Vercel serverless function for Groq API calls
+├── api/groq/chat.js # Vercel serverless function for Groq API calls
+├── about.html      # About page
+├── programs.html   # Programs page
+├── volunteer.html  # Volunteer page
+├── contact.html    # Contact page
 ├── .env            # Local environment variables (not for public commits)
 └── README.md       # This file
 ```
@@ -183,7 +197,7 @@ healthcare-support-web-app/
 ## 🔐 API Key Note
 
 The Groq API key is read server-side from `.env` and never exposed to browser JavaScript.
-This prevents leaking your key in frontend code or browser devtools.
+This prevents leaking your key in the frontend code or browser devtools.
 
 ---
 
@@ -194,4 +208,4 @@ Built for internship assignment · April 2026
 
 ---
 
-_"We evaluate clarity and effort, not perfection." — and this was built with both._
+_"We evaluate clarity and effort, not perfection," — and this was built with both._
